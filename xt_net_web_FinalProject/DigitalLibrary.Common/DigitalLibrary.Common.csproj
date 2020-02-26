@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC623A54-72CC-411C-A7DF-087623CE0F2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DigitalLibrary.Common</RootNamespace>
+    <AssemblyName>DigitalLibrary.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalLibrary.BLL.interface\DigitalLibrary.BLL.interfaces.csproj">
+      <Project>{efe0d0fb-bb11-4bad-a0f4-41adde013864}</Project>
+      <Name>DigitalLibrary.BLL.interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DigitalLibrary.BLL\DigitalLibrary.BLL.csproj">
+      <Project>{e81937e8-1b67-4641-a62d-5986dbe6ed34}</Project>
+      <Name>DigitalLibrary.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DigitalLibrary.DAO.interface\DigitalLibrary.DAL.interfaces.csproj">
+      <Project>{d6135c9d-96b5-4087-a885-28bd015f1a37}</Project>
+      <Name>DigitalLibrary.DAL.interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DigitalLibrary.DAO\DigitalLibrary.DAL.csproj">
+      <Project>{0be91faa-e9c7-4d0c-a826-af4f9bf59173}</Project>
+      <Name>DigitalLibrary.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
