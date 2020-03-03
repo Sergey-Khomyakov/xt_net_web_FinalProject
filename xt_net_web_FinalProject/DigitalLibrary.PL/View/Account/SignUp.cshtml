@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <link rel="icon" type="image/svg" sizes="32x32" href="~/image/book.png" />
+    <title>@ViewBag.Title - Library</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="nav justify-content-center">
+            <form class="p-0 rounded m-3" style="background-color:#f0e8d1">
+                <div class="form-group row m-3">
+                    <label for="inputRegistration" class="col-10 col-form-label">Регистрация</label>
+                </div>
+                <hr style="border-color:#000000" />
+                <div class="form-group row m-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-12">
+                        <input type="email" class="form-control" id="inputEmail3">
+                    </div>
+                </div>
+                <div class="form-group row m-3">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-12">
+                        <input type="password" class="form-control" id="inputPassword3">
+                    </div>
+                </div>
+                <div class="form-group row m-3">
+                    <div class="col-12">
+                        <input type="button" class="form-control" id="buttonSignUp" value="Зарегистрироваться">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

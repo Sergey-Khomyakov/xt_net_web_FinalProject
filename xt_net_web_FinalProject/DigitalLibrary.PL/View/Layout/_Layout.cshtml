@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/javascript" href="~/Scripts/bootstrap.min.js" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="icon" type="image/svg" sizes="32x32" href="~/image/book.png" />
+    <title>@Page.Title - Library</title>
+</head>
+<body>
+    <div class="navbar sticky-top navbar-light" style="background-color: #412c1a">
+        <div class="container">
+            <button type="button" style="background-color:#412c1a" class="border-0" data-toggle="collapse" data-target="#demo" aria-expanded="false" aria-controls="demo">
+                <span>
+                    <img src="~/image/menu.png" />
+                </span>
+            </button>
+            <div class="collapse" id="demo">
+                <ul class="nav nav-justified">
+                    <li class="nav-item nav-link"><a href="~/View/Home/Index.cshtml">Главная страница</a></li>
+                    <li class="nav-item nav-link"><a href="~/View/Home/About.cshtml">Подписка</a></li>
+                    <li class="nav-item nav-link"><a href="~/View/Home/Contact.cshtml">О нас</a></li>
+                </ul>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand pt-2" href="~/View/Home/Index.cshtml">
+                    <img src="~/image/home.png" class="d-inline-block align-top">
+                    <label class="col-form-label pt-0" style="color:#f0e8d1">Library</label>
+                </a>
+            </div>
+            <input class="form-control col mr-2" type="search" placeholder="Поиск">
+            <form class="form-inline my-2 my-lg-0">
+                <a href="~/View/Account/SignIn.cshtml" class="btn btn-outline-light" role="button">Вход</a>
+            </form>
+        </div>      
+    </div>
+    <div class="container body-content" >
+        @RenderBody()
+        <div style="margin-top:450px">
+            <hr />
+            <footer>
+                <p style="color: #f0e8d1">&copy; @DateTime.Now.Year - Library</p>
+            </footer>
+        </div>      
+    </div>
+</body>
+</html>

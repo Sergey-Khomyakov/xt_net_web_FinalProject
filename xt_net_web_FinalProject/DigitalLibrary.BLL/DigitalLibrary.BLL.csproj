@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BookLogic.cs" />
+    <Compile Include="BookModelLogic.cs" />
+    <Compile Include="UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +55,9 @@
       <Project>{d6135c9d-96b5-4087-a885-28bd015f1a37}</Project>
       <Name>DigitalLibrary.DAL.interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DigitalLibrary.Entities\DigitalLibrary.Entity.csproj">
+    <ProjectReference Include="..\DigitalLibrary.Entities\DigitalLibrary.Entities.csproj">
       <Project>{4b9fb1cf-e1f8-4e57-8220-f48a44c57b10}</Project>
-      <Name>DigitalLibrary.Entity</Name>
+      <Name>DigitalLibrary.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

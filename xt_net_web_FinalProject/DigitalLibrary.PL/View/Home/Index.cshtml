@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/View/Layout/_Layout.cshtml";
+    Page.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-lg-3 p-0">
+        <div class="navbar-light rounded m-3" style="background-color:#f0e8d1">
+            <h1>Жанры</h1>
+            <h3>Бизнес-Книги</h3>
+            <h3>Наука, Образование</h3>
+            <h3>Искусство</h3>
+            <h3>Боевики</h3>
+            <h3>Приключения</h3>
+            <h3>Классика</h3>
+            <h3>Фантастика</h3>
+            <h3>Детские книги</h3>
+            <h3>Юмор</h3>
+        </div>
+    </div>
+    @RenderPage("~/View/Home/Books.cshtml")
+</div>

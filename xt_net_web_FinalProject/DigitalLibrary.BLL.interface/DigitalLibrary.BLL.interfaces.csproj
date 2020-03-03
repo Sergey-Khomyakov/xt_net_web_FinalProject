@@ -41,13 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IBookLogic.cs" />
+    <Compile Include="IBookModelLogic.cs" />
+    <Compile Include="IUserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DigitalLibrary.Entities\DigitalLibrary.Entity.csproj">
+    <ProjectReference Include="..\DigitalLibrary.Entities\DigitalLibrary.Entities.csproj">
       <Project>{4b9fb1cf-e1f8-4e57-8220-f48a44c57b10}</Project>
-      <Name>DigitalLibrary.Entity</Name>
+      <Name>DigitalLibrary.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
