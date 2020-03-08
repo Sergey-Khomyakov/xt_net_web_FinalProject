@@ -96,6 +96,12 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\site.css" />
+    <Content Include="Image\book.png" />
+    <Content Include="Image\home.png" />
+    <Content Include="Image\menu.png" />
+    <Content Include="Image\SignIn.png" />
+    <Content Include="Image\User\student.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -205,9 +211,6 @@
     <None Include="packages.config" />
     <Content Include="_ViewStart.cshtml" />
     <Content Include="View\Layout\_Layout.cshtml" />
-    <Content Include="View\Home\About.cshtml" />
-    <Content Include="View\Home\Contact.cshtml" />
-    <Content Include="View\Home\Index.cshtml" />
     <Content Include="View\Account\SignIn.cshtml" />
     <Content Include="View\Account\SignUp.cshtml" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
@@ -222,7 +225,15 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="View\Home\Books.cshtml" />
+    <Content Include="View\Home\Index.cshtml" />
+    <Content Include="View\Home\BookModel.cshtml" />
+    <Content Include="View\Admin\AddBook.cshtml" />
+    <Content Include="View\Admin\RegistUsers.cshtml" />
+    <Content Include="View\Admin\EditingBook.cshtml" />
+    <Content Include="View\Account\SignOut.cshtml" />
+    <Content Include="View\Account\EditingUser.cshtml" />
+    <Content Include="View\Admin\RemoveBook.cshtml" />
+    <Content Include="View\Admin\DeleteUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -249,7 +260,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Image\" />
+    <Folder Include="Image\Book\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

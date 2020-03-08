@@ -6,7 +6,7 @@ namespace DigitalLibrary.BLL.interfaces
 {
     public interface IBookLogic
     {
-        void AddBook(Book book);
+        int AddBook(Book book);
         void DeleteById(int book);
         void EditBook(int bookId, Book editBook);
         Book GetById(int bookId);

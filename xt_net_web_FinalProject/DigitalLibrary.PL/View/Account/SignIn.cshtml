@@ -1,50 +1,59 @@
-﻿@{
+﻿@using DigitalLibrary.Common;
+@using DigitalLibrary.PL.Models;
+@{
     Layout = "~/View/Layout/_Layout.cshtml";
     Page.Title = "SignIn";
+
+    var login = Request["inputLogin"];
+    var password = Request["inputPassword"];
+
+    if (IsPost)
+    {
+        if (DependencyResolver.UserLogic.CheckUser(login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+
+            Response.Redirect("~/View/Home/Index.cshtml");
+        }
+        else
+        {
+            //errorMessage = "Wrong login or password";
+        }
+    }
+
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="~/Content/site.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
-    <link rel="icon" type="image/svg" sizes="32x32" href="~/image/book.png" />
-    <title>@Page.Title - Library</title>
-</head>
-    <body>
-        <div class="container"> 
-            <div class="nav justify-content-center">
-                <form class="p-0 rounded m-3" style="background-color:#f0e8d1">
-                    <div class="form-group row m-3">
-                        <label for="inputАuthorization" class="col-10 col-form-label">Авторизация</label>
-                        <img src="~/image/SignIn.png" width="35" height="35" class="d-inline-block align-top float-right">
-                    </div>
-                    <hr style="border-color:#000000" />
-                    <div class="form-group row m-4">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-12">
-                            <input type="email" class="form-control" id="inputEmail">
-                        </div>
-                    </div>
-                    <div class="form-group row m-4">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-12">
-                            <input type="password" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
-                    <div class="form-group row m-4">
-                        <div class="col-12">
-                            <input type="button" class="form-control" id="buttonSignln" value="Вход" onclick="window.location.href = '~/View/Home/Index.cshtml';">
-                        </div>
-                    </div>
-                    <div class="form-group row m-4">
-                        <div class="col-12">
-                            <input type="button" class="form-control" id="buttonSignUp" value="Регистрация" onclick="window.location.href = '~/View/Account/SignUp.cshtml';">
-                        </div>
-                    </div>
-                </form>
+<div class="col-9 p-0">
+    <div class="nav justify-content-center">
+        <form class="p-0 rounded m-3" style="background-color:#333336" action="~/View/Account/SignIn.cshtml" method="post">
+            <div class="form-group row m-3">
+                <label for="inputАuthorization" class="col-10 col-form-label" style="color:#ffffff">Авторизация</label>
+                <img src="~/image/SignIn.png" width="35" height="35" class="d-inline-block align-top float-right">
             </div>
-         </div>
-    </body>
-</html>
+            <hr style="border-color:#ffffff" />
+            <div class="form-group row m-4">
+                <label for="inputLogin" class="col-sm-2 col-form-label" style="color:#ffffff">Login</label>
+                <div class="col-12">
+                    <input type="text" class="form-control" name="inputLogin" required>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputPassword" class="col-sm-2 col-form-label" style="color:#ffffff">Password</label>
+                <div class="col-12">
+                    <input type="password" class="form-control" name="inputPassword" required>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <div class="col-12">
+                    <button class="form-control">Вход</button>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <div class="col-12">
+                    <input type="button" class="form-control" id="buttonSignUp" value="Регистрация" onclick="window.location.href = 'SignUp.cshtml';">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="~/Content/site.css" />

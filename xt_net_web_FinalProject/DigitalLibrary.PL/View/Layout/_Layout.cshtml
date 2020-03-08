@@ -1,49 +1,100 @@
-﻿<!DOCTYPE html>
+﻿@using DigitalLibrary.PL.Models;
+@using DigitalLibrary.Common;
+@{ 
+    var user = DependencyResolver.UserLogic.GetByLodin(User.Identity.Name);
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/javascript" href="~/Scripts/bootstrap.min.js" />
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/site.css" />
+
     <link rel="icon" type="image/svg" sizes="32x32" href="~/image/book.png" />
     <title>@Page.Title - Library</title>
 </head>
 <body>
-    <div class="navbar sticky-top navbar-light" style="background-color: #412c1a">
+    <div class="navbar sticky-top navbar-light" style="background-color: #333336">
         <div class="container">
-            <button type="button" style="background-color:#412c1a" class="border-0" data-toggle="collapse" data-target="#demo" aria-expanded="false" aria-controls="demo">
-                <span>
-                    <img src="~/image/menu.png" />
-                </span>
-            </button>
-            <div class="collapse" id="demo">
-                <ul class="nav nav-justified">
-                    <li class="nav-item nav-link"><a href="~/View/Home/Index.cshtml">Главная страница</a></li>
-                    <li class="nav-item nav-link"><a href="~/View/Home/About.cshtml">Подписка</a></li>
-                    <li class="nav-item nav-link"><a href="~/View/Home/Contact.cshtml">О нас</a></li>
-                </ul>
-            </div>
             <div class="navbar-header">
                 <a class="navbar-brand pt-2" href="~/View/Home/Index.cshtml">
                     <img src="~/image/home.png" class="d-inline-block align-top">
-                    <label class="col-form-label pt-0" style="color:#f0e8d1">Library</label>
+                    <label class="col-form-label pt-0" style="color:#ffffff">Library</label>
                 </a>
             </div>
-            <input class="form-control col mr-2" type="search" placeholder="Поиск">
-            <form class="form-inline my-2 my-lg-0">
-                <a href="~/View/Account/SignIn.cshtml" class="btn btn-outline-light" role="button">Вход</a>
+            <input class="form-control col mr-2" type="search" style="background-color: #444446; color:#ffffff" placeholder="Название книги...">
+            @if (User.IsInRole("User") || User.IsInRole("Admin"))
+            {
+                <form class="form-inline my-2 my-lg-0">
+                    @if (user.Image.Length == 0)
+                    {
+                        <img class="rounded float-left" src="~/Image/User/student.png" width="32" height="32" />
+                    }
+                    else
+                    {
+                        <img class="rounded float-left" src="data:image;base64,@System.Convert.ToBase64String(user.Image)" width="32" height="32" />
+                    }
+                    <div class="dropdown">
+                        <a class="dropdown-toggle card-link p-1" style="color:#ffffff" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @user.FamilyName @user.Name
+                        </a>
+                        <div class="dropdown-menu" style="background-color:#333336" aria-labelledby="dropdownMenuLink">
+                            <button class="dropdown-item" style="color:#ffffff" name="userId" formaction="~/View/Account/EditingUser.cshtml" onclick="window.location.href = 'EditingUser.cshtml';" value="@user.Id">Настройки</button>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="dropdown-item" style="color:#ffffff" href="~/View/Admin/AddBook.cshtml">Добавить книгу</a>
+                                <a class="dropdown-item" style="color:#ffffff" href="~/View/Admin/EditingBook.cshtml">Редактировать книгу</a>
+                                <a class="dropdown-item" style="color:#ffffff" href="~/View/Admin/RemoveBook.cshtml">Удалить книгу</a>
+                                <a class="dropdown-item" style="color:#ffffff" href="~/View/Admin/RegistUsers.cshtml">Пользователи</a>
+                            }
+                            <div class="dropdown-divider" style="background-color:#ffffff"></div>
+                            <a class="dropdown-item" style="color:#ffffff" href="~/View/Account/SignOut.cshtml">Выход</a>
+                        </div>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="~/View/Account/SignIn.cshtml" class="btn btn-outline-light" role="button">Вход</a>
+                </form>
+            }
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            <form action="~/View/Home/Index.cshtml" method="post">
+                <div class="col-12 p-0">
+                    <div class="navbar-light rounded m-3" style="background-color:#333336">
+                        <nav class="nav flex-column">
+                            <h4 style="color:#ffffff" class="text-center">Жанры</h4>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Бизнес-Книги">Бизнес-Книги</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Наука, Образование">Наука, Образование</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Искусство">Искусство</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Боевики">Боевики</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Приключения">Приключения</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Классика">Классика</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Фантастика">Фантастика</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Детские книги">Детские книги</button>
+                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Юмор">Юмор</button>
+                        </nav>
+                    </div>
+                </div>
             </form>
-        </div>      
-    </div>
-    <div class="container body-content" >
-        @RenderBody()
+            @RenderBody()
+        </div>
         <div style="margin-top:450px">
-            <hr />
+            <hr style="background-color:#ffffff" />
             <footer>
-                <p style="color: #f0e8d1">&copy; @DateTime.Now.Year - Library</p>
+                <p style="color:#ffffff">&copy; @DateTime.Now.Year - Library</p>
             </footer>
-        </div>      
+        </div>
     </div>
+
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/esm/popper.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

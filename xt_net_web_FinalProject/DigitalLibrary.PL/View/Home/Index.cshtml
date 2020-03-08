@@ -1,21 +1,32 @@
-﻿@{
+﻿@using DigitalLibrary.Common
+@{
     Layout = "~/View/Layout/_Layout.cshtml";
-    Page.Title = "Home Page";
+    var Ganere = Request["Genere"];
+    var BookModel = DependencyResolver.BookModelLogic;
+    Page.Title = "Home";
 }
-<div class="row">
-    <div class="col-lg-3 p-0">
-        <div class="navbar-light rounded m-3" style="background-color:#f0e8d1">
-            <h1>Жанры</h1>
-            <h3>Бизнес-Книги</h3>
-            <h3>Наука, Образование</h3>
-            <h3>Искусство</h3>
-            <h3>Боевики</h3>
-            <h3>Приключения</h3>
-            <h3>Классика</h3>
-            <h3>Фантастика</h3>
-            <h3>Детские книги</h3>
-            <h3>Юмор</h3>
+
+<div class="col-9 p-0 ">
+    <div class="navbar-light rounded m-3" style="background-color:#333336">
+        <div class="row row mx-md-n1">
+            <form action="~/View/Home/BookModel.cshtml" method="post">
+                <div class="card-deck">
+                    @foreach (var book in BookModel.GetAll().Where(item => item.Genre == Ganere))
+                    {
+                        <div class="col mb-4">
+                            <div class="card shadow p-3 m-3" style="width: 12rem; background-color:#333336">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(book.Image)" class="card-img-top">
+                                <div class="card-body p-1">
+                                    <button style="color:#ffffff" class="btn text-break card-link font-italic p-1" name="bookId" formaction="~/View/Home/BookModel.cshtml" onclick="window.location.href = 'BookModel.cshtml';" value="@book.Id">@book.Title</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </form>
         </div>
     </div>
-    @RenderPage("~/View/Home/Books.cshtml")
 </div>
+
+
+

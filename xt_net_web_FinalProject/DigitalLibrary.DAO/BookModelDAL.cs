@@ -4,6 +4,7 @@ using DigitalLibrary.DAL.interfaces;
 using DigitalLibrary.Entities;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace DigitalLibrary.DAL
 {
@@ -19,86 +20,14 @@ namespace DigitalLibrary.DAL
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "INSERT INTO [BookModel] (Author, Title, Genre, Description, DateCreatedBook, Image, Pages, IdBook) VALUES (@param1, @param2, @param3, @param4, @param5, @param6, @param7, @param8)";
 
-                var authorParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.String,
-                    ParameterName = "@Author",
-                    Value = bookModel.Author,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param1", authorParameter);
-
-                var titleParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.String,
-                    ParameterName = "@Title",
-                    Value = bookModel.Title,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param2", titleParameter);
-
-
-                var genreParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.String,
-                    ParameterName = "@Genre",
-                    Value = bookModel.Genre,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param3", genreParameter);
-
-                var descriptionParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.String,
-                    ParameterName = "@Description",
-                    Value = bookModel.Description,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param4", descriptionParameter);
-
-                var dateCreatedBookParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.DateTime,
-                    ParameterName = "@DateCreatedBook",
-                    Value = bookModel.DateCreatedBook,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param5", dateCreatedBookParameter);
-
-                var imageParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.Binary,
-                    ParameterName = "@Image",
-                    Value = bookModel.Image,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param6", imageParameter);
-
-                var pagesParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.Int32,
-                    ParameterName = "@Pages",
-                    Value = bookModel.Pages,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param7", pagesParameter);
-
-                var idBookParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.Int32,
-                    ParameterName = "@IdBook",
-                    Value = bookModel.IdBook,
-                    Direction = System.Data.ParameterDirection.Input
-                };
-
-                command.Parameters.AddWithValue("@param8", idBookParameter);
+                command.Parameters.AddWithValue("@param1", bookModel.Author);
+                command.Parameters.AddWithValue("@param2", bookModel.Title);
+                command.Parameters.AddWithValue("@param3", bookModel.Genre);
+                command.Parameters.AddWithValue("@param4", bookModel.Description);
+                command.Parameters.AddWithValue("@param5", bookModel.DateCreatedBook);
+                command.Parameters.AddWithValue("@param6", bookModel.Image);
+                command.Parameters.AddWithValue("@param7", bookModel.Pages);
+                command.Parameters.AddWithValue("@param8", bookModel.IdBook);
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -121,20 +50,22 @@ namespace DigitalLibrary.DAL
 
         public void EditBookModel(int bookModelId, BookModel editBookModel)
         {
+            var book = GetAll().FirstOrDefault(item => item.Id == bookModelId);
+
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = connection.CreateCommand();
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "UPDATE [BookModel] SET [Author] = @param2, [Title] = @param3, [Genre] = @param4, [Description] = @param5, [DateCreatedBook] = @param6, [Image] = @param7, [Pages] = @param8, [IdBook] = @param9 WHERE [Id] = @param1";
                 command.Parameters.AddWithValue("@param1", bookModelId);
-                command.Parameters.AddWithValue("@param2", editBookModel.Author);
-                command.Parameters.AddWithValue("@param3", editBookModel.Title);
-                command.Parameters.AddWithValue("@param4", editBookModel.Genre);
-                command.Parameters.AddWithValue("@param5", editBookModel.Description);
-                command.Parameters.AddWithValue("@param6", editBookModel.DateCreatedBook);
-                command.Parameters.AddWithValue("@param7", editBookModel.Image);
-                command.Parameters.AddWithValue("@param8", editBookModel.Pages);
-                command.Parameters.AddWithValue("@param9", editBookModel.IdBook);
+                _ = editBookModel.Author == "" ? command.Parameters.AddWithValue("@param2", book.Author) : command.Parameters.AddWithValue("@param2", editBookModel.Author);
+                _ = editBookModel.Title == "" ? command.Parameters.AddWithValue("@param3", book.Title) : command.Parameters.AddWithValue("@param3", editBookModel.Title);
+                _ = editBookModel.Genre == "" ? command.Parameters.AddWithValue("@param4", book.Genre) : command.Parameters.AddWithValue("@param4", editBookModel.Genre);
+                _ = editBookModel.Description == "" ? command.Parameters.AddWithValue("@param5", book.Description) : command.Parameters.AddWithValue("@param5", editBookModel.Description);
+                _ = editBookModel.DateCreatedBook.Year < 1754 ? command.Parameters.AddWithValue("@param6", book.DateCreatedBook) : command.Parameters.AddWithValue("@param6", editBookModel.DateCreatedBook);
+                _ = editBookModel.Image.Length == 0 ? command.Parameters.AddWithValue("@param7", book.Image) : command.Parameters.AddWithValue("@param7", editBookModel.Image);
+                _ = editBookModel.Pages == 0 ? command.Parameters.AddWithValue("@param8", book.Pages) : command.Parameters.AddWithValue("@param8", editBookModel.Pages);
+                _ = editBookModel.IdBook == 0 ? command.Parameters.AddWithValue("@param9", book.IdBook) : command.Parameters.AddWithValue("@param9", editBookModel.IdBook);
 
                 connection.Open();
                 command.ExecuteNonQuery();

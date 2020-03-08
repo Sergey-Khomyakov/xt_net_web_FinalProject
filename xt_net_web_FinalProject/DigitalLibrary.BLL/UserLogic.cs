@@ -57,5 +57,11 @@ namespace DigitalLibrary.BLL
 
             return user == null ? false : user.Role.Contains(role);
         }
+        public bool CheckUser(string Login, string Password)
+        {
+            var user = GetByLodin(Login);
+
+            return user == null ? false : user.Password == Password;
+        }
     }
 }

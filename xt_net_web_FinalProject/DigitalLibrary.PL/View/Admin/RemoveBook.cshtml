@@ -1,0 +1,48 @@
+﻿@using DigitalLibrary.Common;
+@{ 
+    Layout = "~/View/Layout/_Layout.cshtml";
+    Page.Title = "Remove Book";
+    
+    if (IsPost)
+    {
+        var bookId = int.Parse(Request["bookId"]);
+        DependencyResolver.BookLogic.DeleteById(bookId);
+        DependencyResolver.BookModelLogic.DeleteById(bookId);
+
+        Response.Redirect("~/View/Home/Index.cshtml");
+    }
+
+}
+<div class="col-9">
+    <div class="nav justify-content-center">
+        <form class="p-0 rounded col-9 m-3" enctype="multipart/form-data" method="post" action="~/View/Admin/RemoveBook.cshtml">
+            <div class="form-group mx-sm-3 mb-2">
+                <label class="col-form-label m-1" style="color:#ffffff">Id Book</label>
+                <input type="text" class="col-8 ml-0 rounded" name="bookId" required>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+            <div class="nav justify-content-center">
+                <div>
+                    <p class="font-weight-bold text-white" style="font-size:20px">Books</p>
+                </div>
+                <table class="table">
+                    <thead style="background-color:#333336">
+                        <tr>
+                            <th scope="col" style="color:#ffffff">ID</th>
+                            <th scope="col" style="color:#ffffff">Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var books in  DependencyResolver.BookModelLogic.GetAll().ToList())
+                        {
+                            <tr>
+                                <th scope="row" style="color:#ffffff">@books.Id</th>
+                                <td style="color:#ffffff">@books.Title</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

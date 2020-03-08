@@ -1,0 +1,56 @@
+﻿@using DigitalLibrary.Common;
+@using System.Linq;
+@{
+    Page.Title = "Book";
+    Layout = "~/View/Layout/_Layout.cshtml";
+    int bookId = 0;
+    if (Request["bookId"] != null)
+    {
+        bookId = int.Parse(Request["bookId"]);
+    }
+    else 
+    {
+        Response.Redirect("~/View/Home/Index.cshtml");
+    }
+    
+    var book = DependencyResolver.BookModelLogic.GetById(bookId);
+    var bookLogic = DependencyResolver.BookLogic;
+}
+<div class="row col-9 m-3 p-1 rounded" style="background-color:#333336">
+    <div class="col-4">
+        <div>
+            <img src="data:image;base64,@System.Convert.ToBase64String(book.Image)" class="card-img-top">
+        </div>
+        <div class="p-1 m-1">
+            <ul class="list-group">
+                <li class="list-group-item text-light" style="background-color:#333336">Автор: @book.Author</li>
+                <li class="list-group-item text-light" style="background-color:#333336">Дата Издания: @book.DateCreatedBook.ToShortDateString()</li>
+                <li class="list-group-item text-light" style="background-color:#333336">Жанр: @book.Genre</li>
+                <li class="list-group-item text-light" style="background-color:#333336">Кол-во страниц: @book.Pages</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-8 card-body">
+        <div class="card-title text-break text-light">
+            <a>Название: @book.Title</a>
+        </div>
+        <div class="card-text text-break text-light mb-5">
+            <a>Описание: @book.Description</a>
+        </div>
+        <div class="text-right mr-3 p-1">
+            @{
+                var bookFile = bookLogic.GetAll().FirstOrDefault(item => item.Id == book.IdBook);      
+            }
+            <button class="btn btn-light" onclick="openPdf()">Прочитать</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openPdf() {
+
+        let pdfWindow = window.open("")
+        pdfWindow.document.write(
+        "<iframe width='100%' height='100%' src='data:application/pdf;base64,@System.Convert.ToBase64String(bookFile.BookFile)" + "'></iframe>")
+}
+</script>

@@ -1,0 +1,40 @@
+﻿@using DigitalLibrary.Common;
+@{
+    Layout = "~/View/Layout/_Layout.cshtml";
+    Page.Title = "Refist Users";
+
+}
+<div class="col-9">
+    <div class="nav justify-content-center">
+        <form class="p-0 rounded col-9 m-3" enctype="multipart/form-data" method="post" action="~/View/Admin/DeleteUser.cshtml">
+            <div class="col-12">
+                <p class="font-weight-bold text-white" style="font-size:20px">
+                    Users
+                </p>
+            </div>
+            <table class="table">
+                <thead style="background-color:#333336">
+                    <tr>
+                        <th scope="col" style="color:#ffffff">ID</th>
+                        <th scope="col" style="color:#ffffff">Login</th>
+                        <th scope="col" style="color:#ffffff">Password</th>
+                        <th scope="col" style="color:#ffffff">Role</th>
+                        <th scope="col" style="color:#ffffff">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in DependencyResolver.UserLogic.GetAll().ToList())
+                    {
+                        <tr>
+                            <th scope="row" style="color:#ffffff">@user.Id</th>
+                            <td style="color:#ffffff">@user.Login</td>
+                            <td style="color:#ffffff">@user.Password</td>
+                            <td style="color:#ffffff">@user.Role[0]</td>
+                            <td><button class="btn btn-danger" name="user_id" formaction="DeleteUser.cshtml" value="@user.Id" onclick="location.href = 'DeleteUser.cshtml';">Delete</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

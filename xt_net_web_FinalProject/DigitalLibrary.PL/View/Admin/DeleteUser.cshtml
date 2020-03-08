@@ -1,0 +1,14 @@
+﻿@using DigitalLibrary.Common;
+@{ 
+
+    var userid = int.Parse(Request["user_id"]);
+    if (userid != 0)
+    {
+        DependencyResolver.UserLogic.DeleteById(userid);
+        Response.Redirect("~/View/Admin/RegistUsers.cshtml");
+    }
+    else
+    {
+        Response.Redirect("~/View/Admin/RegistUsers.cshtml");
+    }
+}

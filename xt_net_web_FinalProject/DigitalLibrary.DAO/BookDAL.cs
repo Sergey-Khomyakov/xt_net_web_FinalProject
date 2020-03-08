@@ -10,26 +10,27 @@ namespace DigitalLibrary.DAL
     public class BookDAL : IBookDAL
     {
         private string _connectionString = ConfigurationManager.ConnectionStrings["SqlServer"].ConnectionString;
-        public void AddBook(Book book)
+        public int AddBook(Book book)
         {
+            int returnValue = -1;
             using (var connection = new SqlConnection(_connectionString))
             {
                 var command = connection.CreateCommand();
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "INSERT INTO [Book] (BookFile) VALUES (@param1)";
+                command.CommandText = "INSERT INTO [Book] (BookFile) VALUES (@param1) SELECT SCOPE_IDENTITY();";
 
-                var bookFileParameter = new SqlParameter()
-                {
-                    DbType = System.Data.DbType.Binary,
-                    ParameterName = "@BookFile",
-                    Value = book.BookFile,
-                    Direction = System.Data.ParameterDirection.Input
-                };
+                command.Parameters.AddWithValue("@param1", book.BookFile);
 
-                command.Parameters.AddWithValue("@param1", bookFileParameter);
-
-                connection.Open();
+                connection.Open();                
                 command.ExecuteNonQuery();
+
+                object returnObj = command.ExecuteScalar();
+
+                if (returnObj != null)
+                {
+                    int.TryParse(returnObj.ToString(), out returnValue);
+                }          
+                return returnValue;
             }
         }
 

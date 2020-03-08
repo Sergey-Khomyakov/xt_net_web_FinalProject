@@ -14,9 +14,9 @@ namespace DigitalLibrary.BLL
         {
             _bookDAL = bookDAL;
         }
-        public void AddBook(Book book)
+        public int AddBook(Book book)
         {
-            _bookDAL.AddBook(book);
+           return _bookDAL.AddBook(book);
         }
 
         public void DeleteById(int bookId)

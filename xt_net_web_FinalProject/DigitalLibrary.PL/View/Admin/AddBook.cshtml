@@ -1,0 +1,134 @@
+﻿@using DigitalLibrary.Common;
+@using DigitalLibrary.PL.Models;
+@{
+    Layout = "~/View/Layout/_Layout.cshtml";
+    Page.Title = "AddBook";
+
+    var author = Request["inputAuthor"];
+    var title = Request["inputTitle"];
+    int pages = 0;
+    var genre = Request["inputGenre"];
+    var description = Request["inputDescription"];
+    DateTime dateTime;
+    if (!DateTime.TryParse(Request["inputDateCreatedBook"], out dateTime)) { }
+
+    if (IsPost)
+    {
+        pages = int.Parse(Request["inputPages"]);
+        var CheckFile1 = Request.Files[0].FileName;
+        byte[] imagBytes = { };
+        if (CheckFile1 != "")
+        {
+            var file = Request.Files[0];
+
+            using (BinaryReader br = new BinaryReader(file.InputStream))
+            {
+                imagBytes = br.ReadBytes(file.ContentLength);
+            }
+        }
+
+        var CheckFile2 = Request.Files[1].FileName;
+        byte[] pdfBytes = { };
+        if (CheckFile2 != "")
+        {
+            var file = Request.Files[1];
+
+            using (BinaryReader br = new BinaryReader(file.InputStream))
+            {
+                pdfBytes = br.ReadBytes(file.ContentLength);
+            }
+        }
+        var fileId = DependencyResolver.BookLogic.AddBook(new DigitalLibrary.Entities.Book() { BookFile = pdfBytes });
+
+        DependencyResolver.BookModelLogic.AddBookModel(new DigitalLibrary.Entities.BookModel()
+        {
+            Author = author,
+            Title = title,
+            Pages = pages,
+            Genre = genre,
+            Description = description,
+            DateCreatedBook = dateTime,
+            Image = imagBytes,
+            IdBook = fileId
+        });
+
+        Response.Redirect("~/View/Home/Index.cshtml");
+    }
+
+}
+<div class="col-9">
+    <div class="nav justify-content-center">
+        <form class="p-0 rounded m-3" style="background-color:#333336" enctype="multipart/form-data" action="~/View/Admin/AddBook.cshtml" method="post">
+            <div class="form-group row m-3">
+                <label for="inputАuthorization" class="col-10 col-form-label" style="color:#ffffff">Добавить книгу</label>
+                <img src="~/image/SignIn.png" width="35" height="35" class="d-inline-block align-top float-right">
+            </div>
+            <hr style="border-color:#ffffff" />
+            <div class="form-group row m-4">
+                <label for="inputAuthor" class="col-sm-2 col-form-label" style="color:#ffffff">Автор</label>
+                <div class="col-12">
+                    <input type="text" class="form-control" name="inputAuthor" required>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputTitle" class="col-sm-2 col-form-label" style="color:#ffffff">Название</label>
+                <div class="col-12">
+                    <input type="text" class="form-control" name="inputTitle" required>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputPages" class="col-sm-4 col-form-label" style="color:#ffffff">Кол-во страниц</label>
+                <div class="col-12">
+                    <input type="text" class="form-control" name="inputPages" required>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputGenre" class="col-sm-2 col-form-label" style="color:#ffffff">Жанр</label>
+                <div class="col-12">
+                    <select class="form-control" name="inputGenre">
+                        <option value="Бизнес-Книги">Бизнес-Книги</option>
+                        <option value="Наука, Образование">Наука, Образование</option>
+                        <option value="Искусство">Искусство</option>
+                        <option value="Боевики">Боевики</option>
+                        <option value="Приключения">Приключения</option>
+                        <option value="Классика">Классика</option>
+                        <option value="Фантастика">Фантастика</option>
+                        <option value="Детские книги">Детские книги</option>
+                        <option value="Юмор">Юмор</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputDescription" class="col-sm-2 col-form-label" style="color:#ffffff">Описание</label>
+                <div class="col-12">
+                    <textarea class="form-control" name="inputDescription" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputDateCreatedBook" class="col-sm-6 col-form-label" style="color:#ffffff">Дата создания книги </label>
+                <div class="col-12">
+                    <input type="date" class="form-control" id="date" min="1918-01-01" name="inputDateCreatedBook" required>
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputImage" class="col-sm-2 col-form-label" style="color:#ffffff">Обложка</label>
+                <div class="col-12">
+                    <input type="file" class="form-control-file" style="color:#ffffff" id="image" name="image" multiple accept="image/png">
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <label for="inputBookFile" class="col-sm-4 col-form-label" style="color:#ffffff">Книга в pdf</label>
+                <div class="col-12">
+                    <input type="file" class="form-control-file" style="color:#ffffff" id="pdf" name="pdf" multiple accept="application/pdf">
+                </div>
+            </div>
+            <div class="form-group row m-4">
+                <div class="col-12">
+                    <button class="form-control">Добавить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="~/Content/site.css" />

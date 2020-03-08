@@ -1,0 +1,15 @@
+﻿body{
+    background-color:#222226;
+}
+@media (max-width: 767px) {
+    /* Цвет пунктов меню в раскрывающихся списках */
+    .navbar-default .navbar-nav .open .dropdown-menu > a {
+        color: #777;
+    }
+        /* Цвет и фон пункта меню в раскрывающихся списках, при поднесении к нему курсора мышки или при нахождении его в фокусе */
+        .navbar-default .navbar-nav .open .dropdown-menu > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > a:focus {
+            color: #333;
+            background-color: transparent;
+        }
+}

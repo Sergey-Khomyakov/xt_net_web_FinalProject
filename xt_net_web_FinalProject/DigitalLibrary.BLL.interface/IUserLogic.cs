@@ -13,5 +13,7 @@ namespace DigitalLibrary.BLL.interfaces
         bool IsUserInRole(string username, string roleName);
         IEnumerable<User> GetAll();
         string[] GetRolesForUser(string username);
+        bool CheckUser(string login, string password);
+        User GetByLodin(string Login);
     }
 }
