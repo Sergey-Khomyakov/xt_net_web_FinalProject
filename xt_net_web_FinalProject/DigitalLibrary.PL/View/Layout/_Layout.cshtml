@@ -24,7 +24,14 @@
                     <label class="col-form-label pt-0" style="color:#ffffff">Library</label>
                 </a>
             </div>
-            <input class="form-control col mr-2" type="search" style="background-color: #444446; color:#ffffff" placeholder="Название книги...">
+            <form action="~/View/Home/BookSearch.cshtml" method="post" class="col">
+                <div class="input-group">
+                    <input class="form-control col mr-2" type="search" name="searchbook" formaction="~/View/Home/BookSearch.cshtml" style="background-color: #444446; color:#ffffff" placeholder="Название книги...">
+                    <div class="input-group-append">
+                        <button class="input-group-text text-light" style="background-color:#333336">Поиск</button>
+                    </div>
+                </div>
+            </form>           
             @if (User.IsInRole("User") || User.IsInRole("Admin"))
             {
                 <form class="form-inline my-2 my-lg-0">
@@ -70,15 +77,15 @@
                     <div class="navbar-light rounded m-3" style="background-color:#333336">
                         <nav class="nav flex-column">
                             <h4 style="color:#ffffff" class="text-center">Жанры</h4>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Бизнес-Книги">Бизнес-Книги</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Наука, Образование">Наука, Образование</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Искусство">Искусство</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Боевики">Боевики</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Приключения">Приключения</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Классика">Классика</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Фантастика">Фантастика</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Детские книги">Детские книги</button>
-                            <button style="color:#ffffff" class="btn btn-link font-italic" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Юмор">Юмор</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Бизнес-Книги">Бизнес-Книги</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Наука, Образование">Наука, Образование</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Искусство">Искусство</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Боевики">Боевики</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Приключения">Приключения</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Классика">Классика</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Фантастика">Фантастика</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Детские книги">Детские книги</button>
+                            <button style="color:#ffffff" class="btn card-link font-italic text-left" name="Genere" formaction="~/View/Home/Index.cshtml" onclick="location.href = 'Index.cshtml';" value="Юмор">Юмор</button>
                         </nav>
                     </div>
                 </div>

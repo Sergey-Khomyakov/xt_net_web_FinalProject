@@ -1,0 +1,35 @@
+﻿@using DigitalLibrary.Common;
+@{
+    Layout = "~/View/Layout/_Layout.cshtml";
+    Page.Title = "Search";
+    var title = Request["searchbook"];
+    var book = DependencyResolver.BookModelLogic.GetAll().FirstOrDefault(item => item.Title == title);
+}
+<div class="col-9 p-0">
+    <div class="navbar-light rounded m-3" style="background-color:#333336">
+        <div class="p-4">
+            <form class="" action="~/View/Home/BookSearch.cshtml" method="post">
+                @if (book == null)
+                {
+                    <a class="text-center" style="color:#ffffff">Книга не найдена :(</a>
+                }
+                else
+                {
+                    <div class="card mb-3 border-dark shadow" style="max-width: 540px;">
+                        <div class="row no-gutters" style="background-color:#333336">
+                            <div class="col-md-4">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(book.Image)" class="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <button class="card-title btn text-break text-light p-0 btn-lg card-link" style="background-color:#333336" name="bookId" formaction="~/View/Home/BookModel.cshtml" onclick="window.location.href = 'BookModel.cshtml';" value="@book.Id">Название: @book.Title</button>
+                                    <p class="card-text text-break" style="color:#ffffff">Описание: @book.Description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+</div>

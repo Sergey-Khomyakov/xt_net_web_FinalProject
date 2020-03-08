@@ -4,11 +4,13 @@ using DigitalLibrary.BLL.interfaces;
 using DigitalLibrary.Entities;
 using DigitalLibrary.DAL.interfaces;
 using System.Linq;
+using Log4netHandler;
 
 namespace DigitalLibrary.BLL
 {
     public class UserLogic : IUserLogic
     {
+
         private readonly IUserDAL _userDAL;
         public UserLogic(IUserDAL userDAL)
         {
@@ -47,7 +49,7 @@ namespace DigitalLibrary.BLL
         public string[] GetRolesForUser(string username)
         {
             var user = GetByLodin(username);
-
+         
             return user == null ? new string[] { } : user.Role;
         }
 

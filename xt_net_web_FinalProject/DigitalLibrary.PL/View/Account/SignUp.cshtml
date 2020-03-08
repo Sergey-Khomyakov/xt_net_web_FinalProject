@@ -34,7 +34,7 @@
             Image = imagBytes,
             Role = new string[] { "User" }
         });
-
+        FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
         Response.Redirect("~/View/Home/Index.cshtml");
     }
 }

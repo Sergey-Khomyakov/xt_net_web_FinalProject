@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -234,6 +237,7 @@
     <Content Include="View\Account\EditingUser.cshtml" />
     <Content Include="View\Admin\RemoveBook.cshtml" />
     <Content Include="View\Admin\DeleteUser.cshtml" />
+    <Content Include="View\Home\BookSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -257,6 +261,10 @@
     <ProjectReference Include="..\DigitalLibrary.Entities\DigitalLibrary.Entities.csproj">
       <Project>{4b9fb1cf-e1f8-4e57-8220-f48a44c57b10}</Project>
       <Name>DigitalLibrary.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Log4netHandler\Log4netHandler.csproj">
+      <Project>{d66a95f2-0b8f-495a-9a93-667b13964a86}</Project>
+      <Name>Log4netHandler</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

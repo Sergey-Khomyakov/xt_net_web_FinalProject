@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E81937E8-1B67-4641-A62D-5986DBE6ED34}</ProjectGuid>
+    <ProjectGuid>{D66A95F2-0B8F-495A-9A93-667B13964A86}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DigitalLibrary.BLL</RootNamespace>
-    <AssemblyName>DigitalLibrary.BLL</AssemblyName>
+    <RootNamespace>Log4netHandler</RootNamespace>
+    <AssemblyName>Log4netHandler</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -44,28 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookLogic.cs" />
-    <Compile Include="BookModelLogic.cs" />
-    <Compile Include="UserLogic.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DigitalLibrary.BLL.interface\DigitalLibrary.BLL.interfaces.csproj">
-      <Project>{efe0d0fb-bb11-4bad-a0f4-41adde013864}</Project>
-      <Name>DigitalLibrary.BLL.interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DigitalLibrary.DAO.interface\DigitalLibrary.DAL.interfaces.csproj">
-      <Project>{d6135c9d-96b5-4087-a885-28bd015f1a37}</Project>
-      <Name>DigitalLibrary.DAL.interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DigitalLibrary.Entities\DigitalLibrary.Entities.csproj">
-      <Project>{4b9fb1cf-e1f8-4e57-8220-f48a44c57b10}</Project>
-      <Name>DigitalLibrary.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Log4netHandler\Log4netHandler.csproj">
-      <Project>{d66a95f2-0b8f-495a-9a93-667b13964a86}</Project>
-      <Name>Log4netHandler</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
