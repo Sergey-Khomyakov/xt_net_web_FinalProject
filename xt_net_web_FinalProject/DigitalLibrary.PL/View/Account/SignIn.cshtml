@@ -7,6 +7,8 @@
     var login = Request["inputLogin"];
     var password = Request["inputPassword"];
 
+    string ErrorMassege = null;
+
     if (IsPost)
     {
         if (DependencyResolver.UserLogic.CheckUser(login, password))
@@ -17,12 +19,18 @@
         }
         else
         {
-            //errorMessage = "Wrong login or password";
+            ErrorMassege = "Check the correct password or login";
         }
     }
 
 }
+
+
 <div class="col-9 p-0">
+        @if (ErrorMassege != null)
+        {
+            <div class="text-light text-center m-1 rounded" style="background-color:red">@ErrorMassege</div>
+        }
     <div class="nav justify-content-center">
         <form class="p-0 rounded m-3" style="background-color:#333336" action="~/View/Account/SignIn.cshtml" method="post">
             <div class="form-group row m-3">
@@ -54,6 +62,6 @@
             </div>
         </form>
     </div>
-</div>
+    </div>
 
 <link rel="stylesheet" type="text/css" href="~/Content/site.css" />

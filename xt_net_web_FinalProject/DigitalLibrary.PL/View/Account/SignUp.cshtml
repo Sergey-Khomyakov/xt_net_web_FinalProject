@@ -40,7 +40,7 @@
 }
 <div class="col-9 p-0">
     <div class="nav justify-content-center">
-        <form class="p-0 rounded m-3" style="background-color:#333336" enctype="multipart/form-data" action="~/View/Account/SignUp.cshtml"  method="post">
+        <form class="p-0 rounded m-3 needs-validation" style="background-color:#333336" novalidate enctype="multipart/form-data" action="~/View/Account/SignUp.cshtml"  method="post">
             <div class="form-group row m-3">
                 <label for="inputRegistration" class="col-10 col-form-label" style="color:#ffffff">Регистрация</label>
             </div>
@@ -48,25 +48,49 @@
             <div class="form-group row m-3">
                 <label for="inputLogin3" class="col-sm-2 col-form-label" style="color:#ffffff">Login</label>
                 <div class="col-12">
-                    <input type="text" class="form-control" name="inputLogin" required>
+                    <input type="text" class="form-control" id="validationCustom01" name="inputLogin" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a login.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-3">
-                <label for="inputPassword3" class="col-sm-2 col-form-label" style="color:#ffffff">Password</label>
+                <label for="inputPassword3" class="col-sm-2 col-form-label" id="validationCustom02" style="color:#ffffff">Password</label>
                 <div class="col-12">
                     <input type="password" class="form-control" name="inputPassword" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a password.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-3">
                 <label for="inputLogin3" class="col-sm-2 col-form-label" style="color:#ffffff">Name</label>
                 <div class="col-12">
-                    <input type="text" class="form-control" name="inputName" required>
+                    <input type="text" class="form-control" id="validationCustomUsername" name="inputName" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a name.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-3">
-                <label for="inputLogin3" class="col-sm-4 col-form-label" style="color:#ffffff">Fimyli Name</label>
+                <label for="inputLogin3" class="col-sm-4 col-form-label"  id="validationCustom03" style="color:#ffffff">Fimyli Name</label>
                 <div class="col-12">
                     <input type="text" class="form-control" name="inputFimyliName" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a fimyli name.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-3">
@@ -77,9 +101,28 @@
             </div>
             <div class="form-group row m-3">
                 <div class="col-12">
-                    <button class="form-control">Зарегистрироваться</button>
+                    <button class="form-control" type="submit">Зарегистрироваться</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+
+
+(function() {
+  'use strict';
+  window.addEventListener('load', function() { 
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>

@@ -58,7 +58,7 @@
 }
 <div class="col-9">
     <div class="nav justify-content-center">
-        <form class="p-0 rounded m-3" style="background-color:#333336" enctype="multipart/form-data" action="~/View/Admin/AddBook.cshtml" method="post">
+        <form class="p-0 rounded m-3 needs-validation" style="background-color:#333336" novalidate enctype="multipart/form-data" action="~/View/Admin/AddBook.cshtml" method="post">
             <div class="form-group row m-3">
                 <label for="inputАuthorization" class="col-10 col-form-label" style="color:#ffffff">Добавить книгу</label>
                 <img src="~/image/SignIn.png" width="35" height="35" class="d-inline-block align-top float-right">
@@ -67,19 +67,37 @@
             <div class="form-group row m-4">
                 <label for="inputAuthor" class="col-sm-2 col-form-label" style="color:#ffffff">Автор</label>
                 <div class="col-12">
-                    <input type="text" class="form-control" name="inputAuthor" required>
+                    <input type="text" class="form-control" id="validationCustom01" name="inputAuthor" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a author.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-4">
                 <label for="inputTitle" class="col-sm-2 col-form-label" style="color:#ffffff">Название</label>
                 <div class="col-12">
-                    <input type="text" class="form-control" name="inputTitle" required>
+                    <input type="text" class="form-control" id="validationCustom02" name="inputTitle" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a title.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-4">
                 <label for="inputPages" class="col-sm-4 col-form-label" style="color:#ffffff">Кол-во страниц</label>
                 <div class="col-12">
-                    <input type="text" class="form-control" name="inputPages" required>
+                    <input type="text" class="form-control" id="validationCustom03" name="inputPages" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a pages.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-4">
@@ -108,23 +126,41 @@
                 <label for="inputDateCreatedBook" class="col-sm-6 col-form-label" style="color:#ffffff">Дата создания книги </label>
                 <div class="col-12">
                     <input type="date" class="form-control" id="date" min="1918-01-01" name="inputDateCreatedBook" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a date created book.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-4">
                 <label for="inputImage" class="col-sm-2 col-form-label" style="color:#ffffff">Обложка</label>
                 <div class="col-12">
-                    <input type="file" class="form-control-file" style="color:#ffffff" id="image" name="image" multiple accept="image/png">
+                    <input type="file" class="form-control-file" style="color:#ffffff" name="image" multiple accept="image/png" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a image file.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-4">
                 <label for="inputBookFile" class="col-sm-4 col-form-label" style="color:#ffffff">Книга в pdf</label>
                 <div class="col-12">
-                    <input type="file" class="form-control-file" style="color:#ffffff" id="pdf" name="pdf" multiple accept="application/pdf">
+                    <input type="file" class="form-control-file" style="color:#ffffff" name="pdf" multiple accept="application/pdf" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a pdf file.
+                    </div>
                 </div>
             </div>
             <div class="form-group row m-4">
                 <div class="col-12">
-                    <button class="form-control">Добавить</button>
+                    <button class="form-control" type="submit">Добавить</button>
                 </div>
             </div>
         </form>
@@ -132,3 +168,21 @@
 </div>
 
 <link rel="stylesheet" type="text/css" href="~/Content/site.css" />
+
+<script>
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    var forms = document.getElementsByClassName('needs-validation');
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
