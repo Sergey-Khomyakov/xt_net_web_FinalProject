@@ -51,7 +51,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "DELETE FROM [User] WHERE [Id] = @param1";
+                    command.CommandText = "DELETE FROM [User] WHERE [UserId] = @param1";
                     command.Parameters.AddWithValue("@param1", userId);
 
                     connection.Open();
@@ -77,7 +77,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "UPDATE [User] SET [Login] = @param2, [Password] = @param3, [Role] = @param4, [Image] = @param5, [Name] = @param6, [FamilyName] = @param7 WHERE [Id] = @param1";
+                    command.CommandText = "UPDATE [User] SET [Login] = @param2, [Password] = @param3, [Role] = @param4, [Image] = @param5, [Name] = @param6, [FamilyName] = @param7 WHERE [UserId] = @param1";
                     command.Parameters.AddWithValue("@param1", userId);
 
                     _ = editUser.Login == "" ? command.Parameters.AddWithValue("@param2", user.Login) : command.Parameters.AddWithValue("@param2", editUser.Login);
@@ -121,7 +121,7 @@ namespace DigitalLibrary.DAL
                     {
                         users.Add(new User()
                         {
-                            Id = (int)reader["Id"],
+                            Id = (int)reader["UserId"],
                             Login = reader["Login"] as string,
                             Password = reader["Password"] as string,
                             Name = reader["Name"] as string,

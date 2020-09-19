@@ -52,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DigiralLabrary.DB\DigiralLabrary.DB.sqlproj">
+      <Project>{ad5ff0f9-73ff-4f80-8c43-f3cd28e9c605}</Project>
+      <Name>DigiralLabrary.DB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DigitalLibrary.DAO.interface\DigitalLibrary.DAL.interfaces.csproj">
       <Project>{d6135c9d-96b5-4087-a885-28bd015f1a37}</Project>
       <Name>DigitalLibrary.DAL.interfaces</Name>

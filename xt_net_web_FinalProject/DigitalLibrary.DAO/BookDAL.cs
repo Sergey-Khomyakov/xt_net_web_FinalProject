@@ -55,7 +55,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "DELETE FROM [Book] WHERE [Id] = @param1";
+                    command.CommandText = "DELETE FROM [Book] WHERE [BookId] = @param1";
                     command.Parameters.AddWithValue("@param1", bookId);
 
                     connection.Open();
@@ -79,7 +79,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "UPDATE [User] SET [BookFile] = @param2 WHERE [Id] = @param1";
+                    command.CommandText = "UPDATE [User] SET [BookFile] = @param2 WHERE [BookId] = @param1";
                     command.Parameters.AddWithValue("@param1", bookId);
                     command.Parameters.AddWithValue("@param2", editBook.BookFile);
 
@@ -116,7 +116,7 @@ namespace DigitalLibrary.DAL
                     {
                         books.Add(new Book()
                         {
-                            Id = (int)reader["Id"],
+                            Id = (int)reader["BookId"],
                             BookFile = Convert.IsDBNull(reader["BookFile"]) ? new byte[] { } : (byte[])reader["BookFile"]
                         });
                     }

@@ -21,7 +21,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "INSERT INTO [BookModel] (Author, Title, Genre, Description, DateCreatedBook, Image, Pages, IdBook) VALUES (@param1, @param2, @param3, @param4, @param5, @param6, @param7, @param8)";
+                    command.CommandText = "INSERT INTO [BookModel] (Author, Title, Genre, Description, DateCreatedBook, Image, Pages, BookId) VALUES (@param1, @param2, @param3, @param4, @param5, @param6, @param7, @param8)";
 
                     command.Parameters.AddWithValue("@param1", bookModel.Author);
                     command.Parameters.AddWithValue("@param2", bookModel.Title);
@@ -53,7 +53,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "DELETE FROM [BookModel] WHERE [Id] = @param1";
+                    command.CommandText = "DELETE FROM [BookModel] WHERE [BookModelId] = @param1";
                     command.Parameters.AddWithValue("@param1", bookModelId);
 
                     connection.Open();
@@ -79,7 +79,7 @@ namespace DigitalLibrary.DAL
                 {
                     var command = connection.CreateCommand();
                     command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "UPDATE [BookModel] SET [Author] = @param2, [Title] = @param3, [Genre] = @param4, [Description] = @param5, [DateCreatedBook] = @param6, [Image] = @param7, [Pages] = @param8, [IdBook] = @param9 WHERE [Id] = @param1";
+                    command.CommandText = "UPDATE [BookModel] SET [Author] = @param2, [Title] = @param3, [Genre] = @param4, [Description] = @param5, [DateCreatedBook] = @param6, [Image] = @param7, [Pages] = @param8, [BookId] = @param9 WHERE [BookModelId] = @param1";
                     command.Parameters.AddWithValue("@param1", bookModelId);
                     _ = editBookModel.Author == "" ? command.Parameters.AddWithValue("@param2", book.Author) : command.Parameters.AddWithValue("@param2", editBookModel.Author);
                     _ = editBookModel.Title == "" ? command.Parameters.AddWithValue("@param3", book.Title) : command.Parameters.AddWithValue("@param3", editBookModel.Title);
@@ -124,7 +124,7 @@ namespace DigitalLibrary.DAL
                     {
                         bookModels.Add(new BookModel()
                         {
-                            Id = (int)reader["Id"],
+                            Id = (int)reader["BookModelId"],
                             Author = reader["Author"] as string,
                             Title = reader["Title"] as string,
                             Pages = (int) reader["Pages"],
@@ -132,7 +132,7 @@ namespace DigitalLibrary.DAL
                             DateCreatedBook = (DateTime)reader["DateCreatedBook"],
                             Genre = reader["Genre"] as string,
                             Description = reader["Description"] as string,
-                            IdBook = (int) reader["IdBook"]
+                            IdBook = (int) reader["BookId"]
                         });
                     }
                 }
